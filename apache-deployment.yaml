@@ -48,9 +48,6 @@ spec:
           httpGet:
             path: /
             port: 80
-            httpHeaders:
-            - name: X-Custom-Header
-              value: k8s-liveness-probe
           initialDelaySeconds: 3
           periodSeconds: 5
           timeoutSeconds: 4
@@ -61,9 +58,6 @@ spec:
           httpGet:
             path: /
             port: 80
-            httpHeaders:
-            - name: X-Custom-Header
-              value: k8s-readiness-probe
           initialDelaySeconds: 3
           timeoutSeconds: 4
           failureThreshold: 1
