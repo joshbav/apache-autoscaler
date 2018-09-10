@@ -19,9 +19,9 @@ spec:
   replicas: 1
   strategy:
     type: RollingUpdate
-    # Set to defaults
-    maxUnavailable: "25%"
-    maxSurge: "25%" 
+      # Set to defaults
+      #maxUnavailable: "25%"
+      #maxSurge: "25%" 
  selector:
     matchLabels:
       app: apache
