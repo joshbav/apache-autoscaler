@@ -55,7 +55,7 @@ spec:
                 operator: In
                 values:
                 - store
-            topologyKey: "kubernetes.io/hostname"
+            topologyKey: kubernetes.io/hostname
       containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
