@@ -1,5 +1,6 @@
 # yaml can be very unforgiving, here's a good online validator to use:  
 #   http://yaml-online-parser.appspot.com/
+#   but it does not like multiple yaml docs, so cut each doc at the --- line before submitting
 # also consider kubectrl -f <file or url> --dry-run
 ---
 apiVersion: apps/v1
