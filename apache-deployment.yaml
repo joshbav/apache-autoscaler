@@ -3,7 +3,7 @@
 #   but it does not like multiple yaml docs, so cut each doc at the --- line before submitting
 # also consider kubectrl -f <file or url> --dry-run
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 # Deployments are a higher-level concept that manages ReplicaSets and provides declarative updates to pods 
 # along with a lot of other useful features. There is no reason not to use them in production.
@@ -17,8 +17,8 @@ spec:
   # and the default of 2 is too low
   revisionHistoryLimit: 20
   replicas: 1
-  strategy:
-    type: RollingUpdate
+  #strategy:
+    #type: RollingUpdate
       # Set to defaults
       #maxUnavailable: "25%"
       #maxSurge: "25%" 
