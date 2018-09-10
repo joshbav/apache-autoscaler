@@ -10,7 +10,7 @@ metadata:
 spec:
   # To avoid one ReplicaSet overwriting the past copies of others
   # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit
-  revisionHistoryLimit:20
+  revisionHistoryLimit: 20
   rollingUpdate:
     # Set to defaults
     maxUnavailable: 25%
