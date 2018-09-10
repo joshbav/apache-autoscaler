@@ -20,7 +20,7 @@ metadata:
 spec:
   # To avoid one ReplicaSet overwriting the past copies of others
   # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit  
-  # and the default of 2 is too low
+  # and the old default of 2 was too low, new default is 10.
   revisionHistoryLimit: 20
   replicas: 1
   selector:
@@ -101,7 +101,7 @@ spec:
               # The SIGTERM notification sent by Docker is also still sent.
               command: ["/bin/sh", "-c", "echo Hello from the preStop handler"]
       # Default, increase if the pod needs more time to gracefully shutdown
-      terminationGracePeriodSeconds: 30
+      # terminationGracePeriodSeconds: 30
 ---
 apiVersion: v1
 kind: Service
