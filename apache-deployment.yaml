@@ -44,9 +44,13 @@ spec:
             memory: 2G
             ephemeral-storage: 6Gi
         livenessProbe:
+          # A liveness probe is ran during the container's lifecycle as a health check
           httpGet:
             path: /
             port: 80
+            httpHeaders:
+            - name: X-Custom-Header
+              value: k8s-liveness-probe
           initialDelaySeconds: 3
           periodSeconds: 5
           timeoutSeconds: 4
