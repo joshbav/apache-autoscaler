@@ -18,7 +18,6 @@ spec:
       containers:
       - name: apache
         image: joshbav/apache-autoscaler
-        args:
         ports:
         - containerPort: 80
 ---
