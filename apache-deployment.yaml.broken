@@ -20,3 +20,14 @@ spec:
         image: joshbav/apache-autoscaler:latest
         ports:
         - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache
+spec:
+  selector:
+    app: apache
+  ports:
+    - port: 80
+      targetPort: 80
