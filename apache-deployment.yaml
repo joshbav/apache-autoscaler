@@ -38,32 +38,6 @@ spec:
             cpu: 100m
             memory: 2G
             ephemeral-storage: 6Gi
-        livenessProbe:
-          # A liveness probe is ran during the container's lifecycle as a health check
-          name: liveness
-          httpGet:
-            path: /
-            port: 80
-            httpHeaders:
-            - name: X-Custom-Header
-              value: k8s-liveness-probe
-          initialDelaySeconds: 3
-          periodSeconds: 5
-          timeoutSeconds: 4
-        readinessProbe:
-          # Is different than a liveness probe, one difference is that a failure triggers
-          # traffic to not be routed to the pod, but it takes a failed liveness probe before
-          # the pod is killed/replaced
-          name: readiness
-          httpGet:
-            path: /
-            port: 80
-            httpHeaders:
-            - name: X-Custom-Header
-              value: k8s-readiness-probe
-          initialDelaySeconds: 3
-          timeoutSeconds: 4
-          failureThreshold: 1
 ---
 apiVersion: v1
 kind: Service
