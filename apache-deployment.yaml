@@ -1,7 +1,6 @@
 ---
 apiVersion: apps/v1
 kind: Deployment
-revisionHistoryLimit: 20
 metadata:
   name: apache
   labels:
