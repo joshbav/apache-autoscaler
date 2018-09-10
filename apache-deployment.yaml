@@ -22,6 +22,7 @@ spec:
         - containerPort: 80
         resources:
           requests:
+            # Beta in Kubernetes 1.11
             ephemeral-storage: 4Gi
           limits:
             cpu: 200m
