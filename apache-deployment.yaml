@@ -17,11 +17,11 @@ spec:
   # and the default of 2 is too low
   revisionHistoryLimit: 20
   replicas: 1
-  #strategy:
-    #type: RollingUpdate
+  # strategy:
+    # type: RollingUpdate
       # Set to defaults
-      #maxUnavailable: "25%"
-      #maxSurge: "25%" 
+      # maxUnavailable: "25%"
+      # maxSurge: "25%" 
   selector:
     matchLabels:
       app: apache
