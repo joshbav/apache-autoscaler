@@ -1,8 +1,6 @@
 ---
 apiVersion: apps/v1
 kind: Deployment
-# Deployments are a higher-level concept that manages ReplicaSets and provides declarative updates to pods 
-# along with a lot of other useful features. There is no reason not to use them in production.
 revisionHistoryLimit: 20
 metadata:
   name: apache
