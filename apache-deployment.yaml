@@ -79,8 +79,8 @@ spec:
               # Can be used to trigger a graceful shutdown, such as stopping services
               # Is only used when a pod is terminated. When a pod completes it's not called.
               # command: ["/bin/sh", "-c", "echo Hello from the preStop handler"]
-         # default, increase if the pod needs more time to gracefully shutdown
-         terminationGracePeriodSeconds: 30
+     # default, increase if the pod needs more time to gracefully shutdown
+     terminationGracePeriodSeconds: 30
 ---
 apiVersion: v1
 kind: Service
