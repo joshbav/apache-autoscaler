@@ -46,7 +46,7 @@ spec:
       #  few hundred nodes in Kubernetes 1.11 
       affinity:
        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
+          requiredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
           podAffinityTerm:
             labelSelector:
