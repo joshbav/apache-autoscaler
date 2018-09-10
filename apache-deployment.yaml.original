@@ -64,6 +64,23 @@ spec:
           initialDelaySeconds: 3
           timeoutSeconds: 4
           failureThreshold: 1
+        lifecycle:
+          postStart:
+            exec:
+              # Can be used to do commands not in the container's entrypoint
+              # Can be useful for diagnostics
+              # Note there is no guarantee it's called before the container’s entrypoint!
+              command: 
+                - "/bin/sh"
+                - "-c"
+                - "echo Hello from the postStart handler"
+          #preStop:
+            #exec:
+              # Can be used to trigger a graceful shutdown, such as stopping services
+              # Is only used when a pod is terminated. When a pod completes it's not called.
+              # command: ["/bin/sh", "-c", "echo Hello from the preStop handler"]
+     # default, increase if the pod needs more time to gracefully shutdown
+     # terminationGracePeriodSeconds: 30
 ---
 apiVersion: v1
 kind: Service
