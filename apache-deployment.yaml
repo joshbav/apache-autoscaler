@@ -18,17 +18,8 @@ spec:
     containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
-        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
-        resources:
-          requests:
-            # Beta in Kubernetes 1.11
-            ephemeral-storage: 4Gi
-          limits:
-            cpu: 100m
-            memory: 2G
-            ephemeral-storage: 6Gi
 ---
 apiVersion: v1
 kind: Service
@@ -40,13 +31,3 @@ spec:
   ports:
     - port: 80
       targetPort: 80
----
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: apache
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app: apache
