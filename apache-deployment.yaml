@@ -147,7 +147,7 @@ kind: Service
 # An ingress controller is a collection of routing rules that govern how external users 
 #  access services running in a Kubernetes cluster. Is a layer 7 construct. 
 metadata:
-  name: apache
+  name: apache-service
 spec:
   selector:
     app: apache
@@ -165,13 +165,10 @@ kind: PodDisruptionBudget
 #   against the disruption budget, but controllers (like deployment and stateful-set) are not 
 #   limited by PDBs when doing rolling upgrade.
 metadata:
-  name: apache
+  name: apache-pod-disruption
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
       app: apache
-
-
-
 
