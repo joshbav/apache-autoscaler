@@ -115,6 +115,12 @@ spec:
             topologyKey: "kubernetes.io/hostname"
 ---
 apiVersion: v1
+kind: Secret
+data:
+  # Note secrets must always be in base64, I created this via   echo my-value |base64
+  my-secret: bXktdmFsdWUK 
+---
+apiVersion: v1
 kind: Service
 # A service is an abstraction which defines a logical set of Pods and a policy by which to access them.
 # For Kubernetes-native applications a simple Endpoints API is updated whenever the set of Pods 
