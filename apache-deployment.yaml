@@ -1,3 +1,6 @@
+# yaml can be very unforgiving, here's a good online validator to use:  
+#   http://yaml-online-parser.appspot.com/
+# also consider kubectrl -f <file or url> --dry-run
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -10,7 +13,7 @@ metadata:
 spec:
   # To avoid one ReplicaSet overwriting the past copies of others
   # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit  
-  # and the default is rather bad, see https://stackoverflow.com/questions/48556854/why-does-the-kubernetes-revisionhistorylimit-default-to-2
+  # and the default of 2 is too low
   revisionHistoryLimit: 20
   rollingUpdate:
     # Set to defaults
