@@ -34,7 +34,6 @@ spec:
       maxSurge: 3
       # During an update only 1 pod can be unavailable at a time
       maxUnavailable: 1  
-  # minReadySeconds: 5
   template:
     metadata:
       labels:
