@@ -21,9 +21,12 @@ spec:
         ports:
         - containerPort: 80
         resources:
+          requests:
+            ephemeral-storage: 4Gi
           limits:
             cpu: 200m
             memory: 2G
+            ephemeral-storage: 6Gi
 ---
 apiVersion: v1
 kind: Service
