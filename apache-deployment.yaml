@@ -17,7 +17,7 @@ spec:
   # and the default of 2 is too low
   revisionHistoryLimit: 20
   strategy:
-    type: rollingUpdate
+    type: RollingUpdate
     # Set to defaults
     maxUnavailable: "25%"
     maxSurge: "25%" 
