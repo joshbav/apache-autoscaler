@@ -22,8 +22,8 @@ spec:
      revisionHistoryLimit: 20
      rollingUpdate:
        # Set to defaults
-       maxUnavailable: 25%
-       maxSurge: 25%
+       maxUnavailable: "25%"
+       maxSurge: "25%"
      containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
