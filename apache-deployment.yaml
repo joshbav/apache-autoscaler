@@ -2,6 +2,7 @@
 # show example use, but mention that they aren't as useful as people assume, 
 # and modifying the deployment's env vars seems to be more popular
 
+# secret, inject into pod
 
 # yaml can be very unforgiving, here's a good online validator to use:  
 #   http://yaml-online-parser.appspot.com/
@@ -60,6 +61,17 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
+        env:
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: apache-secret
+              key: username
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: apache-secret
+              key: password
         resources:
           requests:
             # A node must have 4gig of storage to provide the pod
@@ -118,10 +130,12 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-secret
+  name: apache-secret
 data:
-  # Note secrets must always be in base64, I created this via   echo my-value |base64
-  my-secret: bXktdmFsdWUK 
+  # Note secrets must always be in base64, I created this via: echo my-example-user-name |base64
+  # To test it, take the value and decode it with echo bXktZXhhbXBsZS11c2VyLW5hbWUK |base64 --decode
+  username: bXktZXhhbXBsZS11c2VyLW5hbWUK
+  password: bXktZXhhbXBsZS1wYXNzd29yZAo=
 ---
 apiVersion: v1
 kind: Service
