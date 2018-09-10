@@ -25,10 +25,11 @@ spec:
       labels:
         app: apache
     spec:
-      rollingUpdate:
-        # Set to defaults
-        maxUnavailable: "25%"
-        maxSurge: "25%"
+      strategy:
+        rollingUpdate:
+          # Set to defaults
+          maxUnavailable: "25%"
+          maxSurge: "25%"
       containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
