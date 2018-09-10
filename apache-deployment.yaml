@@ -91,7 +91,7 @@ spec:
           # Use a readiness probe in production.
           httpGet:
             path: /
-           port: 80
+            port: 80
             httpHeaders:
             - name: X-Custom-Header
               value: k8s-readiness-probe
