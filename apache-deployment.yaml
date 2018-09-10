@@ -8,13 +8,6 @@ metadata:
   labels:
     app: apache
 spec:
-  # To avoid one ReplicaSet overwriting the past copies of others
-  # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit
-  revisionHistoryLimit: 20
-  rollingUpdate:
-    # Set to defaults
-    maxUnavailable: 25%
-    maxSurge: 25%
   replicas: 1
   selector:
     matchLabels:
@@ -24,6 +17,13 @@ spec:
       labels:
         app: apache
     spec:
+     # To avoid one ReplicaSet overwriting the past copies of others
+     # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit 
+     revisionHistoryLimit: 20
+     rollingUpdate:
+       # Set to defaults
+       maxUnavailable: 25%
+       maxSurge: 25%
      containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
