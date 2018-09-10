@@ -74,8 +74,8 @@ spec:
                 - "/bin/sh"
                 - "-c"
                 - "echo Hello from the postStart handler"
-          preStop:
-            exec:
+          #preStop:
+            #exec:
               # Can be used to trigger a graceful shutdown, such as stopping services
               # Is only used when a pod is terminated. When a pod completes it's not called.
               # command: ["/bin/sh", "-c", "echo Hello from the preStop handler"]
