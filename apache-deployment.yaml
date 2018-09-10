@@ -103,7 +103,7 @@ spec:
             exec:
               # Can be used to do commands not in the container's entrypoint
               # Can be useful for diagnostics
-              # Note there is no guarantee it's called before the container<E2><80><99>s entrypoint!
+              # Note there is no guarantee it's called before the container's entrypoint!
               command: ["/bin/sh", "-c", "echo Hello from the postStart handler"]
           preStop:
             exec:
