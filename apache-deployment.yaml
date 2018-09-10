@@ -11,7 +11,7 @@ metadata:
 spec:
   # To avoid one ReplicaSet overwriting the past copies of others
   # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit 
- replicas: 1
+  replicas: 1
   selector:
     matchLabels:
       app: apache
