@@ -6,6 +6,13 @@ metadata:
   labels:
     app: apache
 spec:
+  # To avoid one ReplicaSet overwriting the past copies of others
+  # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit
+  revisionHistoryLimit:20
+  rollingUpdate:
+    # Set to defaults
+    maxUnavailable: 25%
+    maxSurge: 25%
   replicas: 1
   selector:
     matchLabels:
@@ -15,7 +22,7 @@ spec:
       labels:
         app: apache
     spec:
-      containers:
+     containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
         imagePullPolicy: IfNotPresent
@@ -30,21 +37,31 @@ spec:
             memory: 2G
             ephemeral-storage: 6Gi
         livenessProbe:
+          # A liveness probe is ran during the container's lifecycle as a health check
+          name: liveness
           httpGet:
             path: /
             port: 80
-          initialDelaySeconds: 2
+            httpHeaders:
+            - name: X-Custom-Header
+              value: k8s-liveness-probe
+          initialDelaySeconds: 3
           periodSeconds: 5
-          successThreshold: 1
-          failureThreshold: 2
+          timeoutSeconds: 4
         readinessProbe:
+          # Is different than a liveness probe, one difference is that a failure triggers
+          # traffic to not be routed to the pod, but it takes a failed liveness probe before
+          # the pod is killed/replaced
+          name: readiness
           httpGet:
             path: /
             port: 80
-          initialDelaySeconds: 2
-          periodSeconds: 5
-          timeoutSeconds: 3
-          failureThreshold: 2
+            httpHeaders:
+            - name: X-Custom-Header
+              value: k8s-readiness-probe
+          initialDelaySeconds: 3
+          timeoutSeconds: 4
+          failureThreshold: 1
 ---
 apiVersion: v1
 kind: Service
