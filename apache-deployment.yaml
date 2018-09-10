@@ -1,6 +1,7 @@
 # yaml can be very unforgiving, here's a good online validator to use:  
 #   http://yaml-online-parser.appspot.com/
 #   but it does not like multiple yaml docs, so cut each doc at the --- line before submitting
+#   leave the default output of json, since kubernetes converts yaml to json internally
 # also consider kubectrl -f <file or url> --dry-run
 ---
 apiVersion: apps/v1
@@ -20,6 +21,15 @@ spec:
   selector:
     matchLabels:
       app: apache
+  strategy:
+    # The type of update done on this deployment will be a rolling update
+    type: RollingUpdate
+    rollingUpdate:
+      # 3 more pods than the replicas setting above is allowed during an update
+      maxSurge: 3
+      maxUnavailable: 1
+  #   
+  minReadySeconds: 5
   template:
     metadata:
       labels:
@@ -53,7 +63,11 @@ spec:
         readinessProbe:
           # Is different than a liveness probe, one difference is that a failure triggers
           # traffic to not be routed to the pod, but it takes a failed liveness probe before
-          # the pod is killed/replaced
+          # the pod is killed/replaced. Also, traffic is only sent to a pod after a readiness 
+          # probe succeeds, unlike a liveness probe, so if a pod takes a while to initialize
+          # we don't want any traffic going to it until it's ready. 
+          # Readiness probes are quite useful for large java apps that take time to initialize.  
+          # Use a readiness probe in production.
           httpGet:
             path: /
             port: 80
@@ -62,7 +76,7 @@ spec:
               value: k8s-readiness-probe
           initialDelaySeconds: 3
           timeoutSeconds: 4
-          failureThreshold: 1
+          failureThreshold: 2
         lifecycle:
           postStart:
             exec:
@@ -83,6 +97,13 @@ spec:
 ---
 apiVersion: v1
 kind: Service
+# A service is an abstraction which defines a logical set of Pods and a policy by which to access them.
+# For Kubernetes-native applications a simple Endpoints API is updated whenever the set of Pods 
+#   in a Service changes. For non-native applications, Kubernetes offers a virtual-IP-based bridge 
+#   to Services which redirects to the backend Pods. Is a layer 4 construct. 
+#
+# An ingress controller is a collection of routing rules that govern how external users 
+#  access services running in a Kubernetes cluster. Is a layer 7 construct. 
 metadata:
   name: apache
 spec:
@@ -94,6 +115,13 @@ spec:
 ---
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
+# Cluster managers, hosting providers, etc should use tools which respect Pod Disruption Budgets 
+#   by calling the Eviction API instead of directly deleting pods, for voluntary actions.
+# Involuntary actions also count against the budget. 
+# The kubectl drain command utilized pod disruption budgets
+# Pods which are deleted or unavailable due to a rolling upgrade to an application do count 
+#   against the disruption budget, but controllers (like deployment and stateful-set) are not 
+#   limited by PDBs when doing rolling upgrade.
 metadata:
   name: apache
 spec:
