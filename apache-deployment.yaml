@@ -1,3 +1,8 @@
+# TODO: configmap, ref: https://github.com/kubernetes/kubernetes/issues/22368
+# show example use, but mention that they aren't as useful as people assume, 
+# and modifying the deployment's env vars seems to be more popular
+
+
 # yaml can be very unforgiving, here's a good online validator to use:  
 #   http://yaml-online-parser.appspot.com/
 #   but it does not like multiple yaml docs, so cut each doc at the --- line before submitting
@@ -27,9 +32,9 @@ spec:
     rollingUpdate:
       # 3 more pods than the replicas setting above is allowed during an update
       maxSurge: 3
-      maxUnavailable: 1
-  #   
-  minReadySeconds: 5
+      # During an update only 1 pod can be unavailable at a time
+      maxUnavailable: 1  
+  # minReadySeconds: 5
   template:
     metadata:
       labels:
@@ -43,12 +48,14 @@ spec:
         - containerPort: 80
         resources:
           requests:
+            # A node must have 4gig of storage to provide the pod
             # Beta in Kubernetes 1.11
             ephemeral-storage: 4Gi
           limits:
+            # 0.1 CPU is used for this particular example
             cpu: 100m
             memory: 2G
-            ephemeral-storage: 6Gi
+            ephemeral-storage: 4Gi
         livenessProbe:
           # A liveness probe is ran during the container's lifecycle as a health check
           httpGet:
