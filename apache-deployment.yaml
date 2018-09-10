@@ -15,7 +15,7 @@ spec:
       labels:
         app: apache
     spec:
-    containers:
+      containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
         ports:
