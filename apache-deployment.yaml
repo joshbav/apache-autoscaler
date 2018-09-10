@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 # Deployments are a higher-level concept that manages ReplicaSets and provides declarative updates to pods 
 # along with a lot of other useful features. There is no reason not to use them in production.
+revisionHistoryLimit: 20
 metadata:
   name: apache
   labels:
@@ -10,8 +11,7 @@ metadata:
 spec:
   # To avoid one ReplicaSet overwriting the past copies of others
   # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit 
-  revisionHistoryLimit: 20
-  replicas: 1
+ replicas: 1
   selector:
     matchLabels:
       app: apache
