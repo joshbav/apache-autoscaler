@@ -72,11 +72,12 @@ spec:
         effect: "NoSchedule"
       containers:
       - name: apache
-        image: joshbav/apache-autoscaler:latest
-        # Always is good for lab work, but IfNotPresent is more ideal for production
-        #  and using a version # or timestamp as the label, which increments with every 
-        #  build of the container is a good practice. :latest should not be used in production
-        imagePullPolicy: Always
+        # Pulling an image by digest instead of tag makes things immutabe. 
+        # The classic problem of updating an image with the same tag is avoided, 
+        #  although you should not do this anyhow, and CI/CD systems avoid the problem. 
+        # Regardless, a tag of :latest should not be used in production
+        image: joshbav/apache-autoscaler@sha256:43676794b0e3b5e3267c89f31058f618e5f38bceb4f6b4145555ae49296b6281
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         env:
