@@ -22,7 +22,9 @@ spec:
   # see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit  
   # and the old default of 2 was too low, new default is 10.
   revisionHistoryLimit: 20
+  # In production you would likely not use 1 replica, this is for demo purposes
   replicas: 1
+  # Allow this Deployment/ReplicaSet/Pod(s) to be found via an app=apache
   selector:
     matchLabels:
       app: apache
@@ -30,16 +32,10 @@ spec:
     # The type of update done on this deployment will be a rolling update
     type: RollingUpdate
     rollingUpdate:
-      # 3 more pods than the replicas setting above is allowed during an update
+      # 3 more pods than the current replica value is allowed during an update
       maxSurge: 3
       # During an update only 1 pod can be unavailable at a time
       maxUnavailable: 1  
-  # If a node is tainted with example-taint:true then don't deploy to it 
-  tolerations: 
-  - key: "example-taint"
-    operator: "Equal"
-    value: "true"
-    effect: "NoSchedule"
   # This is a pod template created by the deployment, from this a replica set will be created automatically
   template:
     metadata:
@@ -67,6 +63,12 @@ spec:
                   operator: In
                   values:
               topologyKey: kubernetes.io/hostname
+      # If a node is tainted with example-taint:true then don't deploy to it 
+      tolerations: 
+      - key: "example-taint"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
       containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
