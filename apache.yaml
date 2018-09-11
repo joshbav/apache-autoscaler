@@ -10,9 +10,9 @@
 # also consider kubectrl -f <file or url> --dry-run
 ---
 apiVersion: apps/v1
-kind: Deployment
 # Deployments are a higher-level concept that manages ReplicaSets and provides declarative updates to pods 
 # along with a lot of other useful features. There is no reason not to use them in production.
+kind: Deployment
 metadata:
   name: apache-deployment
   labels:
@@ -56,12 +56,12 @@ spec:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             podAffinityTerm:
-            - labelSelector:
-              matchSelector:
-              - key: app
-                operator: In
-                values:
-                - apache
+              labelSelector:
+                matchSelector:
+                - key: app
+                  operator: In
+                  values:
+                  - apache
               topologyKey: kubernetes.io/hostname
       # If a node is tainted with example-taint:true then don't deploy to it 
       tolerations: 
