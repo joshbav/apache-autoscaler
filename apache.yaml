@@ -61,6 +61,12 @@ spec:
                   operator: In
                   values:
               topologyKey: kubernetes.io/hostname
+      # If a node is tainted with example-taint:true then don't deploy to it 
+      tolerations: 
+      - key: "example-taint"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
       containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
@@ -80,12 +86,6 @@ spec:
             secretKeyRef:
               name: apache-secret
               key: password
-        # If a node is tainted with example-taint:true then don't deploy to it 
-        tolerations: 
-        - key: "example-taint"
-          operator: "Equal"
-          value: "true"
-          effect: "NoSchedule"
         resources:
           requests:
             # A node must have 4gig of storage to provide the pod
