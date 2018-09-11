@@ -34,7 +34,13 @@ spec:
       maxSurge: 3
       # During an update only 1 pod can be unavailable at a time
       maxUnavailable: 1  
-  # This is a pod template created by the deployment, and replica sets will be created automatically
+  # If a node is tainted with example-taint:true then don't deploy to it 
+  tolerations: 
+  - key: "example-taint"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+  # This is a pod template created by the deployment, from this a replica set will be created automatically
   template:
     metadata:
       labels:
@@ -61,12 +67,6 @@ spec:
                   operator: In
                   values:
               topologyKey: kubernetes.io/hostname
-      # If a node is tainted with example-taint:true then don't deploy to it 
-      tolerations: 
-      - key: "example-taint"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
       containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
