@@ -56,7 +56,13 @@ spec:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             podAffinityTerm:
-            topologyKey: kubernetes.io/hostname
+            - labelSelector:
+              matchSelector:
+              - key: app
+                operator: In
+                values:
+                - apache
+              topologyKey: kubernetes.io/hostname
       # If a node is tainted with example-taint:true then don't deploy to it 
       tolerations: 
       - key: "example-taint"
