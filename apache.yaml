@@ -63,6 +63,8 @@ spec:
         ports:
         - containerPort: 80
         env:
+        - name: EXAMPLE-NORMAL-VARIABLE
+          value: "This-is-a-normal-injected-variable"
         - name: SECRET_USERNAME
           valueFrom:
             secretKeyRef:
