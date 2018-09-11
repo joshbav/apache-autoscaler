@@ -100,7 +100,7 @@ spec:
             httpHeaders:
             - name: X-Custom-Header
               value: k8s-liveness-probe
-          initialDelaySeconds: 3
+          initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 4
         readinessProbe:
