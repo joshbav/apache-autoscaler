@@ -73,7 +73,10 @@ spec:
       containers:
       - name: apache
         image: joshbav/apache-autoscaler:latest
-        imagePullPolicy: IfNotPresent
+        # Always is good for lab work, but IfNotPresent is more ideal for production
+        #  and using a version # or timestamp as the label, which increments with every 
+        #  build of the container is a good practice. :latest should not be used in production
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
@@ -94,11 +97,12 @@ spec:
             # A node must have 4gig of storage to provide the pod
             # Beta in Kubernetes 1.11
             ephemeral-storage: 4Gi
+            memory: 1G 
           limits:
             # 0.1 CPU is used for this particular example
             cpu: 100m
             memory: 2G
-            ephemeral-storage: 4Gi
+            ephemeral-storage: 5Gi
         livenessProbe:
           # A liveness probe is ran during the container's lifecycle as a health check
           httpGet:
