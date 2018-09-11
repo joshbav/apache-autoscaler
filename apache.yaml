@@ -38,6 +38,9 @@ spec:
       maxUnavailable: 1  
   # This is a pod template created by the deployment, from this a replica set will be created automatically
   template:
+    metadata:
+      labels:
+        app: apache
     spec:
       # This will tell the scheduler to prefer (not require) one pod per node until 
       #  that's no longer possible, only then a node with an existing pod will receive a second instance. 
