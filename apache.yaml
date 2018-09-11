@@ -58,7 +58,7 @@ spec:
             - weight: 1       
               podAffinityTerm:
                 labelSelector:
-                  matchSelector:
+                  matchExpressions:
                   - key: app
                     operator: In
                     values:
