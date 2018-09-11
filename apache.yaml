@@ -40,8 +40,8 @@ spec:
   template:
     metadata:
       labels:
-        - app: "apache"
-        - prod: "true"
+        "app": "apache"
+        "prod": "true"
         - test: "false"
       annotations:
         - build-time: "july-4-2018"
