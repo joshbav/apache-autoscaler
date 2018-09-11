@@ -55,7 +55,8 @@ spec:
                 matchExpressions:
                 - key: app
                   operator: In
-                  values: apache
+                  values: 
+                  - apache
               topologyKey: kubernetes.io/hostname
       # If a node is tainted with example-taint:true then don't deploy to it 
       tolerations: 
