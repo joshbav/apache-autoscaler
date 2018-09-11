@@ -15,7 +15,7 @@ kind: Deployment
 # Deployments are a higher-level concept that manages ReplicaSets and provides declarative updates to pods 
 # along with a lot of other useful features. There is no reason not to use them in production.
 metadata:
-  name: apache
+  name: apache-deployment
   labels:
     app: apache
 spec:
@@ -35,6 +35,7 @@ spec:
       maxSurge: 3
       # During an update only 1 pod can be unavailable at a time
       maxUnavailable: 1  
+  # This is a pod template created by the deployment, and replica sets will be created automatically
   template:
     metadata:
       labels:
