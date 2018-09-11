@@ -40,13 +40,13 @@ spec:
   template:
     metadata:
       labels:
-        app: apache
-        prod: true
-        test: false
+        app: "apache"
+        prod: "true"
+        test: "false"
       annotations:
-        build-time: july-4-2018
-        jenkins-job-id: jenkins-1234
-        deploy-time: july-7-2018
+        build-time: "july-4-2018"
+        jenkins-job-id: "jenkins-1234"
+        deploy-time: "july-7-2018"
     spec:
       # This will tell the scheduler to prefer (not require) one pod per node until 
       #  that's no longer possible, only then a node with an existing pod will receive a second instance. 
