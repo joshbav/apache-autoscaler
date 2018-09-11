@@ -114,7 +114,9 @@ spec:
               value: k8s-liveness-probe
           initialDelaySeconds: 5
           periodSeconds: 5
-          timeoutSeconds: 3
+          # Since this is a specific autoscale lab use case where the web server is slow
+          #  so as to make a lot of CPU use, we want a long timeout
+          timeoutSeconds: 10
         readinessProbe:
           # Is different than a liveness probe, one difference is that a failure triggers
           # traffic to not be routed to the pod, but it takes a failed liveness probe before
@@ -130,7 +132,9 @@ spec:
             - name: X-Custom-Header
               value: k8s-readiness-probe
           initialDelaySeconds: 5
-          timeoutSeconds: 4
+          # Since this is a specific autoscale lab use case where the web server is slow
+          #  so as to make a lot of CPU use, we want a long timeout
+          timeoutSeconds: 10
           failureThreshold: 3
         lifecycle:
           postStart:
