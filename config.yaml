@@ -1,0 +1,18 @@
+bootstrap_url: http://10.20.1.60:88
+cluster_name: DCOS-POC
+exhibitor_storage_backend: static
+master_discovery: static
+master_list:
+- 10.20.1.60
+- 10.20.2.83
+- 10.20.3.190
+resolvers:
+- 10.20.0.2
+feature_dcos_storage_enabled: true
+enable_docker_gc: true
+mesos_container_log_sink: journald+logrotate
+#platform: aws
+security: permissive
+superuser_username: bootstrapuser
+Superuser_password_hash: $6$rounds=656000$RGHkEC.iioJpMp2W$q8JtAY6.edZbf0QYPD5isxiPELvF2nmqSoRGBoBIgbnLj.Vm.atgS.D04q.VNcNYK55r/a3hD1Ot94dGtQndN/
+
