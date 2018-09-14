@@ -7,4 +7,4 @@ metadata:
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "replicasets", "pods", "hpa"]
-  verbs: ["get", "list", "watch", "create", "describe"] # You can also use ["*"]
+  verbs: ["get", "list", "watch", "describe"] # You can also use ["*"]
