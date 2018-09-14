@@ -8,8 +8,7 @@
 # kubectl describe role help-desk
 ---
 kind: Role
-# debug, removed /v1beta1
-apiVersion: rbac.authorization.k8s.io
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   namespace: default
   name: help-desk
