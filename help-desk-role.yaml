@@ -1,6 +1,15 @@
+# A role is a definition of the permissions for each Kubernetes resource type
+# This example is basically readonly for deployments, repicases, pods, 
+# and horizontal pod autoscalers
+#
+# User Impersonation with kubectl is a good way to test RBAC
+# https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation
+# 
+# kubectl describe role help-desk
 ---
 kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+# debug, removed /v1beta1
+apiVersion: rbac.authorization.k8s.io
 metadata:
   namespace: default
   name: help-desk

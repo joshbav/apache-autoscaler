@@ -1,5 +1,11 @@
+# Subjects are users (human or machine), or groups of users
+# Note Kubernetes does not have user accounts integrated, only Service Accounts
+# Role Bindings define what Subjects have what Roles
+# This example binds the help-desk user to the help-desk Cluster Role (a separate yaml file)
+#
+# kubectl describe clusterrolebinding help-desk-binding
 ---
-# Note a ClusterRoleBinding is cluster-wide
+# Note a ClusterRoleBinding is cluster-wide, thus no namespace specified
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
