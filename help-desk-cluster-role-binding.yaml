@@ -1,0 +1,34 @@
+# Role Bindings define what Subjects have what Roles
+# This example binds the help-desk user to the help-desk Cluster Role (a separate yaml file)
+# Subjects are users (human or machine), or groups of users
+# Note Kubernetes does not have user accounts integrated by default, only Service Accounts
+# In practice, a service account is managed like a regular user.
+#
+# kubectl get clusterrolebinding
+# kubectl describe clusterrolebinding help-desk-cluster-role-binding
+
+# Subjects are users (human or machine), or groups of users
+# Note Kubernetes does not have user accounts integrated by default, only Service Accounts
+# In practice, a service account is managed just like a regular user.
+# Role Bindings define what Subjects have what Roles
+# This example binds the help-desk user to the help-desk Cluster Role (a separate yaml file)
+#
+# kubectl get clusterrolebinding
+# kubectl describe clusterrolebinding help-desk-binding
+# kubectl auth can-i get pods --as help-desk
+# kubectl auth can-i delete pods --as help-desk
+---
+# Note a ClusterRoleBinding is cluster-wide, thus no namespace specified
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: help-desk-binding
+subjects:
+- kind: User
+  name: help-desk
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  # View is a built in read-only role. kubectl describe clusterrole view
+  name: view
+  apiGroup: rbac.authorization.k8s.io
