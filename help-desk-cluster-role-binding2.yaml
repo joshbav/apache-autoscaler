@@ -30,5 +30,5 @@ subjects:
 roleRef:
   kind: ClusterRole
   # View is a built in read-only role. kubectl describe clusterrole view
-  name: view
+  name: help-desk
   apiGroup: rbac.authorization.k8s.io
