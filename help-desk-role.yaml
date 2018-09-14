@@ -4,6 +4,8 @@
 #
 # User Impersonation with kubectl is a good way to test RBAC
 # https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation
+# this is wrong:
+# kubectl get pods --as=help-desk --as-group=system:masters
 # 
 # kubectl describe role help-desk
 ---
